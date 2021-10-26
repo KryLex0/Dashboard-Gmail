@@ -1,0 +1,202 @@
+<script type="text/javascript" src="../../assets/script.js"></script>
+<button mat-button><a href="/commercials">Liste Utilisateurs</a></button>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div>
+                <p>Période du 
+                    <input type="date" id="dateDebut" #dateDebut required> au 
+                    <input type="date" id="dateFin" #dateFin>
+                    <button (click)="getDateStartWeek(dateDebut.value, dateFin.value)">Rechercher</button>
+                </p>
+
+
+            </div>
+            <!--
+            <table class="table table-srtiped">
+                <thead>
+                    <th>NB MAIL RECU</th>
+                    <th>NB MAIL ENVOYE</th>
+                    <th>DEBUT SEMAINE</th>
+                    <th>FIN SEMAINE</th>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let commercial_mail_data of commercials_mail_data1">
+                        <td>{{commercial_mail_data.nbMailsReceived}}</td>
+                        <td>{{commercial_mail_data.nbMailsSent}}</td>
+                        <td>{{commercial_mail_data.dateStartWeek}}</td>
+                        <td>{{commercial_mail_data.dateEndWeek}}</td>
+                    </tr>
+                
+                </tbody>
+            </table>
+        -->
+
+        <table class="styled-table" style="text-align: center;">
+            <thead>
+                <tr class="active-row" *ngFor="let commercial_mail_data_datePicker1 of commercial_mail_data_datePicker">
+                    <th colspan="2">
+                        <b>Commercial: </b><br>
+                          {{commercial_name}} <a class="active-row" href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to={{commercial_email}}" target="_blank">&lt;{{commercial_email}}&gt;</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                <tr class="active-row" *ngFor="let commercial_mail_data_datePicker1 of commercial_mail_data_datePicker">
+
+                    <td *ngIf="commercial_mail_data_datePicker?.length === 1; else elseData">
+                        <!--affichage des stats en fonction de la periode entrée si présente dans la BDD-->
+                        <h5>Nombres de mails reçus</h5><br>
+                        <p id="nbMails">{{nbMailsReceivedDatePicker}}</p>
+                    </td>
+                        
+                        <!--affichage "aucunes données" si les stats en fonction de la période ne sont pas présente dans la BDD-->
+                    <ng-template #elseData>
+                        <td>
+                            <h5>Nombres de mails envoyés</h5><br>
+                            <p id="nbMails">aucunes données</p>
+                        </td>
+                    </ng-template>
+                    
+                    <td *ngIf="commercial_mail_data_datePicker?.length === 1; else elseData1">
+                        <!--affichage des stats en fonction de la periode entrée si présente dans la BDD-->
+                        <h5>Nombres de mails envoyés</h5><br>
+                        <p id="nbMails">{{nbMailsSentDatePicker}}</p>
+                    </td>
+                    
+                        <!--affichage "aucunes données" si les stats en fonction de la période ne sont pas présente dans la BDD-->
+                    <ng-template #elseData1>
+                        <td>
+                            <h5>Nombres de mails envoyés</h5><br>
+                            <p id="nbMails">aucunes données</p>
+                        </td>
+                    </ng-template>
+                    
+                </tr>               
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+            <table style="width: 50%; float: left;">
+                <thead>
+                    <tr>
+                        <td>Derniers Mails reçus</td>
+                        <td>Date</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let emailDataIsSent1 of emailDataIsSent">
+                        <td>{{emailDataIsSent1.email}}</td>
+                        <td>Le {{emailDataIsSent1.date}} à {{emailDataIsSent1.heure}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <table style="width: 50%; float: left;">
+                <thead>
+                    <tr>
+                        <td>Derniers Mails envoyés</td>
+                        <td>Date</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let emailDataIsReceived1 of emailDataIsReceived">
+                        <td>{{emailDataIsReceived1.email}}</td>
+                        <td>Le {{emailDataIsReceived1.date}} à {{emailDataIsReceived1.heure}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+
+            
+ 
+
+
+
+
+
+
+
+<!--
+ <tr class="active-row">
+                    <th colspan="2">
+                        <b>Liste Emails</b>
+                    </th>
+                </tr>
+                <tr class="active-row">
+                    <td>
+                    <h5>Derniers Mails reçus de:</h5><br>
+                    
+
+                    </td>
+
+                    <td>
+                        <h5>Derniers Mails envoyés à:</h5><br>
+                    </td>
+                </tr>
+
+
+
+
+
+
+
+
+
+
+            <div style="float: left;margin-right:10px">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Derniers Mails reçus</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>test1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="float: left">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Derniers Mails envoyés </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>test1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        -->
+
+
+
+
+        
+
+
+
+
+
+
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,68 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<button mat-button (click)="onHome()">Liste Utilisateurs</button>
+
+
+
+
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <input id="myInput" type="text" placeholder="Search..">
+
+            <table class="styled-table sortable">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Mails reçus</th>
+                        <th>Mails envoyés</th>
+                        <th>Mails Total</th>
+                        <th>Délégation?</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    <tr class="active-row item" *ngFor="let commercial_data of commercials_data">
+                        <td>{{commercial_data.nomCommercial}}</td>
+                        <td>{{commercial_data.emailCommercial}}</td>
+                        <td>{{commercial_data.nbMailsReceived}}</td>
+                        <td>{{commercial_data.nbMailsSent}}</td>
+                        <td>{{commercial_data.totalMails}}</td>
+                        
+                        <!--colonne delegation mail-->
+                        <td *ngIf="commercial_data.isDelegated === true; else elseIsDelegated">Autorisé</td>
+                        <ng-template #elseIsDelegated><td>Non autorisé</td></ng-template>
+
+                        <!--colonne actions-->
+                        <td *ngIf="commercial_data.isDelegated === true; else elseActions" style="text-align: center;">
+                            <a (click)="onDetails(commercial_data.id, commercial_data.idCommercial)">
+                                <i class="fa fa-info" style="font-size:36px; color: blue"></i>
+                            </a>
+                            
+                            <a (click)="removeDelegationCommercial(commercial_data.id)">
+                                <i class="fa fa-times-circle" style="font-size:30px; margin-left:10px; color: red"></i>
+                            </a>
+                            
+                        </td>
+                        <ng-template #elseActions>
+                            <td style="text-align: center;">
+                                <a (click)="setCommercialDelegated(commercial_data.id)">
+                                    <i class="fa fa-envelope" style="font-size:30px; margin-left:10px; color:green"></i>
+                                </a>
+                            </td>
+                        </ng-template>
+                        
+                        
+                        
+                        
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
